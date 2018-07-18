@@ -20,7 +20,7 @@ function send($fields,$url){ //send function
     curl_close($ch);  //web service  connection codes
     return json_decode($response); //return value
 }
-define('total',50); //total value
+define('total',100); //total value
 
 $url = "http://stajoguzcan.eticaret.in/rest1/auth/login/"; //between the quotes enter your web service login url
 $username="username"; //between the quotes enter your web service username

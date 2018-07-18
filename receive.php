@@ -16,8 +16,8 @@ function connections($token,$transfer,$url){ //connections function
     return send($fields,$url); //return function value
 }
 
-define('total',2000); //total value
-define('buffer',50); //buffer value
+define('total',1000); //total value
+define('buffer',100); //buffer value
 
 $url = "http://stajoguzcan.eticaret.in/rest1/auth/login/"; //between the quotes enter your web service login url
 $username="username"; //between the quotes enter your web service username
@@ -34,79 +34,29 @@ $j=0; //total counter
 $file = fopen('csvname.csv', 'r');  //enter to csvname
 $time_start = microtime(true); //time start
 
+$col = fgetcsv($file,2000,";"); //first read the lead -- for example 18 colums
 while (($line = fgetcsv($file,2000,";")) !== FALSE) {
     if($j==(total)) break; //if total reaches the value, stops
     $main_array=array( //sequence map create -- You can edit this area by yourself in According to the exit Csv
-        "ProductCode" => $line[0],
-        "ProductName" => $line[1],
-        "DefaultCategoryCode" => $line[2],
-        "SupplierProductCode" => $line[3],
-        "Barcode" => $line[4],
-        "Stock" => $line[5],
-        "StockUnit" => $line[6],
-        "IsActive" => $line[7],
-        "Vat" => $line[8],
-        "Currency" => $line[9],
-        "BuyingPrice" => $line[10],
-        "SellingPrice" => $line[11],
-        "SearchKeywords" => $line[12],
-        "IsNewProduct" => $line[13],
-        "OnSale" => $line[14],
-        "ImageUrl" => $line[15],
-        "IsDisplayProduct" => $line[16],
-        "VendorDisplayOnly" => $line[17],
-        "DisplayWithVat" => $line[18],
-        "Brand" => $line[19],
-        "Model" => $line[20],
-        "HasSubProducts" => $line[21],
-        "Supplier" => $line[22],
-        "CustomerGroupDisplay" => $line[23],
-        "Additional1" => $line[24],
-        "Additional2" => $line[25],
-        "Additional3" => $line[26],
-        "RelatedProductsBlock1" => $line[27],
-        "RelatedProductsBlock2" => $line[28],
-        "RelatedProductsBlock3" => $line[29],
-        "Magnifier" => $line[30],
-        "MemberMinOrder" => $line[31],
-        "MemberMaxOrder" => $line[32],
-        "VendorMinOrder" => $line[33],
-        "VendorMaxOrder" => $line[34],
-        "FreeDeliveryMember" => $line[35],
-        "FreeDeliveryVendor" => $line[36],
-        "ShortDescription" => $line[37],
-        "Details" => $line[38],
-        "Width" => $line[39],
-        "Height" => $line[40],
-        "Depth" => $line[41],
-        "Weight" => $line[42],
-        "CBM" => $line[43],
-        "Document" => $line[44],
-        "Warehouse" => $line[45],
-        "WarrantyInfo" => $line[46],
-        "DeliveryInfo" => $line[47],
-        "DeliveryTime" => $line[48],
-        "ProductNote" => $line[49],
-        "SeoSettingsId" => $line[50],
-        "SeoTitle" => $line[51],
-        "SeoKeywords" => $line[52],
-        "SeoDescription" => $line[53],
-        "ListNo" => $line[53],
-        "Label1" => array(
-            "Value" => 1
-        ),
-        "Label2" => array(
-            "Value" => 0
-        ),
-        "Label3" => 1,
-        "Label4" => 0,
-        "Label5" => 0,
-        "Label6" => 0,
-        "Label7" => 0,
-        "Label8" => 0,
-        "Label9" => 0,
-        "Label10" => 0
-    );
+        $col[0] => $line[0],
+        $col[1] => $line[1],
+        $col[2] => $line[2],
+        $col[3] => $line[3],
+        $col[4] => $line[4],
+        $col[5] => $line[5],
+        $col[6] => $line[6],
+        $col[7] => $line[7],
+        $col[8] => $line[8],
+        $col[9] => $line[9],
+        $col[10] => $line[10],
+        $col[11] => $line[11],
+        $col[12] => $line[12],
+        $col[13] => $line[13],
+        $col[14] => $line[14],
+        $col[15] => $line[15],
+        $col[16] => $line[16],
+        $col[17] => $line[17]
+    ); //Your csv file column by create
 
     $j++;
     if($j%buffer==0 || $j==total){ //if your buffer==zero of if the value reaches
